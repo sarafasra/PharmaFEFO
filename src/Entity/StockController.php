@@ -76,6 +76,6 @@ class StockBatch
 
     public function setStatus($status)
     {
-        $this->status = $status;
+        $this->status = $status; 
     }
 }
