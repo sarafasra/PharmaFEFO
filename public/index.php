@@ -1,22 +1,14 @@
 <?php
 
-class Database
-{
-    private static $pdo = null;
+require_once "../config/database.php";
+require_once "../src/Repository/StockBatchRepository.php";
 
-    public static function connect()
-    {
-        if (self::$pdo === null) {
-            self::$pdo = new PDO(
-                "mysql:host=localhost;dbname=pharmafefo",
-                "root",
-                "",
-                [
-                    PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION
-                ]
-            );
-        }
+echo "<h1>TEST STOCK BATCH REPOSITORY</h1>";
 
-        return self::$pdo;
-    }
-}
+$repo = new StockBatchRepository();
+
+$data = $repo->getAll();
+
+echo "<pre>";
+print_r($data);
+echo "</pre>";
