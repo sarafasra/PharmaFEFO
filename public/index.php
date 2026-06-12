@@ -1,14 +1,21 @@
 <?php
 
-require_once "../config/database.php";
-require_once "../src/Repository/StockBatchRepository.php";
+require_once __DIR__ . "/../src/Controller/StockController.php";
 
-echo "<h1>TEST STOCK BATCH REPOSITORY</h1>";
+$controller = new StockController();
 
-$repo = new StockBatchRepository();
+if (isset($_POST['add'])) {
+    $controller->add();
+}
 
-$data = $repo->getAll();
+if (isset($_GET['delete'])) {
+    $controller->delete();
+}
 
-echo "<pre>";
-print_r($data);
-echo "</pre>";
+if (isset($_POST['update'])) {
+    $controller->update();
+}
+
+
+
+$controller->dashboard();
