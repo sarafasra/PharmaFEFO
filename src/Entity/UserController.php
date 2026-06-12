@@ -16,41 +16,37 @@ class UserController
         require __DIR__ . "/../../templates/auth/login.php";
     }
 
-    public function login()
-    {
-        session_start();
+   public function login()
+{
+    $email = trim($_POST['email']);
+    $password = trim($_POST['password']);
 
-        $email = $_POST['email'];
-        $password = $_POST['password'];
+    $user = $this->repo->findByEmail($email);
 
-        $user = $this->repo->findByEmail($email);
+    if ($user && $user['password'] == $password) {
 
-        if ($user && $user['password'] == $password) {
+        $_SESSION['user'] = $user;
 
-            $_SESSION['user'] = $user;
-
-            if ($user['role'] == 'ADMIN') {
-                header("Location: index.php");
-                exit;
-            }
-
-            if ($user['role'] == 'PHARMACIEN') {
-                header("Location: index.php");
-                exit;
-            }
-
-            if ($user['role'] == 'PREPARATEUR') {
-                header("Location: index.php");
-                exit;
-            }
+        if ($user['role'] == 'ADMIN') {
+            header("Location: index.php?dashboard=admin");
+            exit;
         }
 
-        echo "Email ou mot de passe incorrect";
+        if ($user['role'] == 'PHARMACIEN') {
+            header("Location: index.php?dashboard=pharmacien");
+            exit;
+        }
+
+        if ($user['role'] == 'PREPARATEUR') {
+            header("Location: index.php?dashboard=preparateur");
+            exit;
+        }
     }
 
+    echo "Email ou mot de passe incorrect";
+}
     public function logout()
     {
-        session_start();
 
         $_SESSION = [];
 

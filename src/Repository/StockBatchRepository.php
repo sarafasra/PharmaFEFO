@@ -63,4 +63,29 @@ public function update($id, $batch, $qty, $date, $status)
 
     return $stmt->execute([$batch, $qty, $date, $status, $id]);
 }
+public function getFefoLot()
+{
+    $pdo = Database::connect();
+
+    $stmt = $pdo->query("
+        SELECT *
+        FROM lots
+        ORDER BY date_peremption ASC
+        LIMIT 1
+    ");
+
+    return $stmt->fetch(PDO::FETCH_ASSOC);
+}
+public function getAllOrderedByExpiration()
+{
+    $pdo = Database::connect();
+
+    $stmt = $pdo->query("
+        SELECT *
+        FROM lots
+        ORDER BY date_peremption ASC
+    ");
+
+    return $stmt->fetchAll(PDO::FETCH_ASSOC);
+}
 }

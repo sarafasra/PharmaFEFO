@@ -11,7 +11,6 @@ class StockController
         $this->repo = new StockBatchRepository();
     }
 
-
     public function dashboard()
     {
         $lots = $this->repo->getAll();
@@ -35,7 +34,14 @@ class StockController
         require __DIR__ . "/../../templates/view/admin/dashboard.php";
     }
 
-   
+ 
+    public function fefo()
+    {
+        $lots = $this->repo->getAllOrderedByExpiration();
+
+        require __DIR__ . "/../../templates/view/preparateur/dashboard.php";
+    }
+
     public function add()
     {
         $this->repo->add(
@@ -48,13 +54,11 @@ class StockController
         header("Location: index.php");
         exit;
     }
+
     public function delete()
     {
         $id = $_GET['delete'] ?? null;
-
-        if ($id) {
-            $this->repo->delete($id);
-        }
+        $this->repo->delete($id);
 
         header("Location: index.php");
         exit;

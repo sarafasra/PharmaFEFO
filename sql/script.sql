@@ -68,3 +68,6 @@ ADD CONSTRAINT alertes_ibfk_1
 FOREIGN KEY (lot_id)
 REFERENCES lots(id)
 ON DELETE CASCADE;
+
+SELECT * FROM lots;
+SELECT * FROM users;
