@@ -7,7 +7,7 @@ class Database
     public static function connect()
     {
         if (self::$pdo === null) {
-            self::$pdo = new PDO(
+            self::$pdo = new PDO( 
                 "mysql:host=localhost;dbname=pharmafefo",
                 "root",
                 "",
