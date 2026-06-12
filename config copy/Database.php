@@ -12,7 +12,7 @@ class Database
                 "root",
                 "",
                 [
-                    PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION
+                    PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION 
                 ]
             );
         }
