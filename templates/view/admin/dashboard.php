@@ -21,8 +21,18 @@
 
 <main class="flex-1 p-6 space-y-6">
 
-<h1 class="text-2xl font-bold">Espace Administrateur</h1>
+<div class="flex justify-between items-center mb-6">
 
+    <h1 class="text-2xl font-bold">
+        Espace Administrateur
+    </h1>
+
+    <a href="index.php?logout=1"
+       class="bg-red-500 text-white px-4 py-2 rounded-lg hover:bg-red-600 transition">
+        Déconnexion
+    </a>
+
+</div>
 
 <div class="bg-white p-4 rounded shadow">
 

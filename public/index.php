@@ -1,9 +1,43 @@
 <?php
 
+session_start();
+
 require_once __DIR__ . "/../src/Controller/StockController.php";
+require_once __DIR__ . "/../src/Entity/UserController.php";
 
 $controller = new StockController();
+$userController = new UserController();
 
+/* =========================
+   LOGIN ROUTING
+========================= */
+if (isset($_GET['login'])) {
+
+    if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+        $userController->login();
+    } else {
+        $userController->loginForm();
+    }
+
+    exit;
+}
+
+/* LOGOUT */
+if (isset($_GET['logout'])) {
+    $userController->logout();
+}
+
+/* =========================
+   SECURITY CHECK
+========================= */
+if (!isset($_SESSION['user'])) {
+    header("Location: index.php?login=1");
+    exit;
+}
+
+/* =========================
+   STOCK ACTIONS
+========================= */
 if (isset($_POST['add'])) {
     $controller->add();
 }
@@ -15,7 +49,11 @@ if (isset($_GET['delete'])) {
 if (isset($_POST['update'])) {
     $controller->update();
 }
+if (isset($_GET['logout'])) {
+    $userController->logout();
+}
 
-
-
+/* =========================
+   DASHBOARD
+========================= */
 $controller->dashboard();
