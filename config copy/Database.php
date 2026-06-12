@@ -14,7 +14,7 @@ class Database
                 [
                     PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION 
                 ]
-            );
+            ); 
         }
 
         return self::$pdo;
